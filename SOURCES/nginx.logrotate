@@ -1,0 +1,14 @@
+/usr/local/nginx/log/nginx/*log {
+    create 0644 nginx nginx
+    monthly
+    minsize 100M
+    rotate 4
+    missingok
+    notifempty
+    dateext
+    compress
+    sharedscripts
+    postrotate
+        /bin/kill -USR1 `cat /usr/local/nginx/log/nginx.pid 2>/dev/null` 2>/dev/null || true
+    endscript
+}
